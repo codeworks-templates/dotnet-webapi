@@ -70,15 +70,15 @@ namespace {{name}}
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(options =>
             {
-                options.Authority = $"https://{Configuration["Auth0:Domain"]}/";
-                options.Audience = Configuration["Auth0:Audience"];
+                options.Authority = $"https://{Configuration["AUTH0_DOMAIN"]}/";
+                options.Audience = Configuration["AUTH0_AUDIENCE"];
             });
 
         }
 
         private IDbConnection CreateDbConnection()
         {
-            string connectionString = Configuration["DB:ConnectionString"];
+            string connectionString = Configuration["CONNECTION_STRING"];
             return new MySqlConnection(connectionString);
         }
 
