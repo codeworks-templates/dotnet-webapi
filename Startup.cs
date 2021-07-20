@@ -34,7 +34,6 @@ namespace {{name}}
             ConfigureCors(services);
             ConfigureAuth(services);
             services.AddControllers();
-            services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "{{name}}", Version = "v1" });
