@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:5.0
-COPY ./{{name}}/bin/Release/net5.0/publish/ App/
+FROM mcr.microsoft.com/dotnet/sdk:6.0
+COPY ./bin/Release/net5.0/publish/ App/
 WORKDIR /App
 CMD ASPNETCORE_URLS=http://*:$PORT dotnet {{name}}.dll
