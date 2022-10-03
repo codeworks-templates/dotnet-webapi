@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using CodeWorks.Utils
+using CodeWorks.Utils;
 using {{name}}.Models;
 using {{name}}.Services;
-using CodeWorks.Auth0Provider;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -38,6 +37,4 @@ namespace {{name}}.Controllers
             }
         }
     }
-
-
 }
