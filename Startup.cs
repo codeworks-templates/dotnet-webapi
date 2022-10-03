@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using CodeWorks.Utils;
 using MySqlConnector;
 using {{name}}.Repositories;
 using {{name}}.Services;
@@ -38,6 +39,7 @@ namespace {{name}}
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "{{name}}", Version = "v1" });
             });
+            services.AddSingleton<Auth0Provider>();
             services.AddScoped<IDbConnection>(x => CreateDbConnection());
             
             services.AddScoped<AccountsRepository>();
