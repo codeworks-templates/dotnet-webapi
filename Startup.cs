@@ -26,7 +26,7 @@ public class Startup
     services.AddControllers();
     services.AddSwaggerGen(c =>
     {
-      c.SwaggerDoc("v1", new OpenApiInfo { Title = "Jot", Version = "v1" });
+      c.SwaggerDoc("v1", new OpenApiInfo { Title = "{{name}}", Version = "v1" });
     });
     services.AddSingleton<Auth0Provider>();
     services.AddScoped<IDbConnection>(x => CreateDbConnection());
