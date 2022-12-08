@@ -1,19 +1,16 @@
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS base
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
 WORKDIR /app
-EXPOSE 80/tcp
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
-WORKDIR /src
-COPY ["{{name}}.csproj", "./"]
-RUN dotnet restore "{{name}}.csproj"
-COPY . .
-WORKDIR "/src/."
-RUN dotnet build "{{name}}.csproj" -c Release -o /app/build
+# Copy everything
+COPY *.csproj ./
+# Restore as distinct layers
+RUN dotnet restore
+# Build and publish a release
+COPY . ./
+RUN dotnet publish -c Release -o out
 
-FROM build AS publish
-RUN dotnet publish "{{name}}.csproj" -c Release -o /app/publish
-
-FROM base AS final
+# Start runtime image
+FROM mcr.microsoft.com/dotnet/sdk:6.0
 WORKDIR /app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "{{name}}.dll"]
+COPY --from=build-env /app/out .
+CMD ASPNETCORE_URLS=http://* dotnet {{name}}.dll
