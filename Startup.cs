@@ -80,7 +80,7 @@ public class Startup
     {
       app.UseDeveloperExceptionPage();
       app.UseSwagger();
-      app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Jot v1"));
+      app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "{{name}}"));
       app.UseCors("CorsDevPolicy");
     }
 
