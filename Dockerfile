@@ -1,5 +1,5 @@
 # Use an official Node.js runtime as the base image for the client build
-FROM node:20 AS client-builder
+FROM --platform=linux/amd64 node:20-slim AS client-builder
 
 # Set the working directory in the client builder container
 WORKDIR /app/client
@@ -16,7 +16,8 @@ COPY client ./
 # Build the client-side code
 RUN npm run build
 
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
+# Manually specify an amd64 arch build environment for the dotnet restore to complete
+FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine-amd64 AS build-env
 
 WORKDIR /app/server
 
@@ -31,9 +32,10 @@ COPY --from=client-builder /app/client/docs /app/server/wwwroot
 
 # Build and publish a release
 RUN dotnet publish -c Release -o out
+# If build fails here, check your /server folder for a *.sln file and delete it
 
 # Start runtime image
-FROM mcr.microsoft.com/dotnet/sdk:8.0
+FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine
 WORKDIR /app
 COPY --from=build-env /app/server/out .
 CMD ASPNETCORE_URLS=http://*:$PORT dotnet {{name}}.dll
