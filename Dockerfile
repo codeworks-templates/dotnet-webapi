@@ -35,7 +35,7 @@ RUN dotnet publish -c Release -o out
 # If build fails here, check your /server folder for a *.sln file and delete it
 
 # Start runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=build-env /app/server/out .
 CMD ASPNETCORE_URLS=http://*:$PORT dotnet {{name}}.dll
