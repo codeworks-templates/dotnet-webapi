@@ -9,26 +9,30 @@ public class AccountService
     _repo = repo;
   }
 
-  internal Account GetProfileByEmail(string email)
+  private Account GetAccount(string accountId)
   {
-    return _repo.GetByEmail(email);
+    Account account = _repo.GetById(accountId);
+    if (account == null)
+    {
+      throw new Exception("Invalid Account Id");
+    }
   }
 
-  internal Account GetOrCreateProfile(Account userInfo)
+  internal Account GetOrCreateAccount(Account userInfo)
   {
-    Account profile = _repo.GetById(userInfo.Id);
-    if (profile == null)
+    Account account = _repo.GetById(userInfo.Id);
+    if (account == null)
     {
       return _repo.Create(userInfo);
     }
-    return profile;
+    return account;
   }
 
-  internal Account Edit(Account editData, string userEmail)
+  internal Account Edit(Account editData, string accountId)
   {
-    Account original = GetProfileByEmail(userEmail);
-    original.Name = editData.Name?.Length > 0 ? editData.Name : original.Name;
-    original.Picture = editData.Picture?.Length > 0 ? editData.Picture : original.Picture;
+    Account original = GetAccount(accountId);
+    original.Name = editData.Name ?? editData.Name;
+    original.Picture = editData.Picture ?? editData.Picture;
     return _repo.Edit(original);
   }
 }

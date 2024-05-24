@@ -20,7 +20,7 @@ public class AccountController : ControllerBase
     try
     {
       Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
-      return Ok(_accountService.GetOrCreateProfile(userInfo));
+      return Ok(_accountService.GetOrCreateAccount(userInfo));
     }
     catch (Exception e)
     {
