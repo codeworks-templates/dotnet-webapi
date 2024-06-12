@@ -16,6 +16,7 @@ public class AccountService
     {
       throw new Exception("Invalid Account Id");
     }
+    return account;
   }
 
   internal Account GetOrCreateAccount(Account userInfo)
