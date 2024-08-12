@@ -1,5 +1,6 @@
 namespace {{name}}.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("[controller]")]
 public class AccountController : ControllerBase
@@ -14,7 +15,6 @@ public class AccountController : ControllerBase
   }
 
   [HttpGet]
-  [Authorize]
   public async Task<ActionResult<Account>> Get()
   {
     try
