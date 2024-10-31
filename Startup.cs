@@ -14,6 +14,9 @@ public class Startup
   public Startup(IConfiguration configuration)
   {
     Configuration = configuration;
+    
+      // converts snake_case to PascalCase
+    DefaultTypeMap.MatchNamesWithUnderscores = true;
   }
 
   public IConfiguration Configuration { get; }
