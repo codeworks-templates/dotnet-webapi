@@ -1,5 +1,5 @@
 # Use an official Node.js runtime as the base image for the client build
-FROM --platform=linux/amd64 node:20-slim AS client-builder
+FROM --platform=linux/amd64 node:22-slim AS client-builder
 
 # Set the working directory in the client builder container
 WORKDIR /app/client
