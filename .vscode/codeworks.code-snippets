@@ -6,7 +6,7 @@
       "",
       "public class $TM_FILENAME_BASE",
       "{",
-      "",
+      "${0}",
       "}"
     ],
     "description": "A simple starter for a C# class",
@@ -20,9 +20,9 @@
       "",
       "[ApiController]",
       "[Route(\"api/[controller]\")]",
-      "class $TM_FILENAME_BASE : ControllerBase",
+      "public class $TM_FILENAME_BASE : ControllerBase",
       "{",
-      "",
+      "${0}",
       "}"
     ],
     "description": "A simple starter for a C# API Controller class",
