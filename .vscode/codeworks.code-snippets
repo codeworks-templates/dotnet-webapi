@@ -2,7 +2,7 @@
   "Class Template": {
     "prefix": "cs:class",
     "body": [
-      "namespace $WORKSPACE_NAME.${RELATIVE_FILEPATH/([a-zA-Z0-9]+)\\\\..+/$1/};",
+      "namespace $WORKSPACE_NAME.${RELATIVE_FILEPATH/([a-zA-Z0-9]+)[\\\\\\/]..+/$1/};",
       "",
       "public class $TM_FILENAME_BASE",
       "{",
