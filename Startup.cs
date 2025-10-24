@@ -31,7 +31,14 @@ public class Startup
     {
       c.SwaggerDoc("v1", new OpenApiInfo { Title = "{{name}}", Version = "v1" });
     });
-    services.AddSingleton<Auth0Provider>();
+
+    services.AddMemoryCache();
+    services.AddHttpClient<Auth0Provider>(o => {
+      o.DefaultRequestHeaders.Accept.Add(
+        new MediaTypeWIthQUalityHeaderValue("application/json")
+      )
+    });
+    
     services.AddScoped<IDbConnection>(x => CreateDbConnection());
 
     services.AddScoped<AccountsRepository>();
@@ -105,4 +112,5 @@ public class Startup
     });
   }
 }
+
 
