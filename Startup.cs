@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using MySqlConnector;
+using System.Net.Http.Headers;
 
 namespace {{name}};
 
@@ -33,10 +34,9 @@ public class Startup
     });
 
     services.AddMemoryCache();
-    services.AddHttpClient<Auth0Provider>(o => {
-      o.DefaultRequestHeaders.Accept.Add(
-        new MediaTypeWIthQUalityHeaderValue("application/json")
-      )
+    services.AddHttpClient<Auth0Provider>(o =>
+    {
+      o.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
     });
     
     services.AddScoped<IDbConnection>(x => CreateDbConnection());
@@ -112,5 +112,6 @@ public class Startup
     });
   }
 }
+
 
 
