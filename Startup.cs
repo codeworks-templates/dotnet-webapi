@@ -45,7 +45,7 @@ public class Startup
     services.AddScoped<AccountService>();
   }
 
-  private void ConfigureCors(IServiceCollection services)
+ private void ConfigureCors(IServiceCollection services)
   {
     services.AddCors(options =>
     {
@@ -55,9 +55,7 @@ public class Startup
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .AllowCredentials()
-                .WithOrigins(new string[]{
-                "http://localhost:8080", "http://localhost:8081"
-            });
+                .WithOrigins(["http://localhost:8080", "http://localhost:8081"]);
             });
     });
   }
@@ -112,6 +110,7 @@ public class Startup
     });
   }
 }
+
 
 
 
